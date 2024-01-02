@@ -1,0 +1,84 @@
+version: '3.19'
+
+services:
+  mysql:
+    image: mysql
+    container_name: mysql_c
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: users
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
+    ports:
+      - 3306:3306
+    volumes:
+      - ./db/mysql:/data
+
+  adminer:
+    image: adminer
+    container_name: adminer_c
+    restart: always
+    ports:
+      - 8080:8080
+
+  # mongo:
+  #   image: mongo
+  #   container_name: mongo_c
+  #   restart: always
+  #   environment:
+  #     MONGO_INITDB_ROOT_USERNAME: root
+  #     MONGO_INITDB_ROOT_PASSWORD: example
+  #     MONGO_INITDB_DATABASE: rest_main
+  #   ports:
+  #     - 27017:27017
+  #   volumes:
+  #     - ./db/mongo:/data
+
+  # mongo-express:
+  #   image: mongo-express
+  #   container_name: mongo_express_c
+  #   restart: always
+  #   ports:
+  #     - 8081:8081
+  #   environment:
+  #     ME_CONFIG_MONGODB_ADMINUSERNAME: root
+  #     ME_CONFIG_MONGODB_ADMINPASSWORD: example
+  #     ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017
+
+  # rabbitmq:
+  #   container_name: rabbitmq_c
+  #   image: rabbitmq:3.11-management
+  #   # environment:
+  #   #   RABBITMQ_DEFAULT_VHOST: /
+  #   #   RABBITMQ_DEFAULT_USER: rest_rabbit_mq
+  #   #   RABBITMQ_DEFAULT_PASS: rest_rabbit_mq
+  #   volumes:
+  #     - ./rabbitMQ:/var/lib/rabbitmq/data
+  #     - ./rabbitMQ:/var/log/rabbitmq/log
+  #   ports:
+  #     - 15672:15672
+  #     - 5672:5672
+
+  # # admin:
+  # #   build: ./admin
+  # #   container_name: admin_c
+  # #   ports:
+  # #     - 8000:8000
+  # #   stdin_open: true
+  # #   volumes:
+  # #     - ./admin:/app/node_modules
+  # #     - ./admin:/app
+  # #   tty: true
+
+  # # main:
+  # #   build: ./main
+  # #   container_name: main_c
+  # #   ports:
+  # #     - 8001:8001
+  # #   stdin_open: true
+  # #   volumes:
+  # #     - ./main:/app/node_modules
+  # #     - ./main:/app
+  # #   tty: true
